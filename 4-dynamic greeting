@@ -1,0 +1,31 @@
+import React, { useState, useEffect } from 'react';
+function TimeBasedGreeting() {
+const [greeting, setGreeting] = useState('');
+useEffect(() => {
+const updateGreeting = () => {
+const now = new Date();
+const hours = now.getHours();
+if (hours >= 0 && hours < 12) {
+setGreeting('Good Morning');
+} else if (hours >= 12 && hours < 17) {
+setGreeting('Good Afternoon');
+} else if (hours >= 17 && hours < 21) {
+setGreeting('Good Evening');
+} else {
+setGreeting('Good Night');
+}
+};
+// Update greeting immediately
+updateGreeting();
+// Update greeting every minute to handle day changes
+const interval = setInterval(updateGreeting, 60000);
+return () => clearInterval(interval);
+}, []);
+return (
+<div className="greeting-app">
+<h1>{greeting}</h1>
+<p>Current time: {new Date().toLocaleTimeString()}</p>
+</div>
+);
+}
+export default TimeBasedGreeting;

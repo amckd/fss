@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form Validation</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+max-width: 500px;
+margin: 0 auto;
+padding: 20px;
+}
+.form-group {
+margin-bottom: 15px;
+}
+label {
+display: block;
+margin-bottom: 5px;
+font-weight: bold;
+}
+input {
+width: 100%;
+padding: 8px;
+box-sizing: border-box;
+}
+button {
+padding: 10px 15px;
+background-color: #4CAF50;
+color: white;
+border: none;
+cursor: pointer;
+}
+.error {
+color: red;
+font-size: 0.9em;
+margin-top: 5px;
+}
+</style>
+</head>
+<body>
+<h1>Registration Form</h1>
+<form id="registrationForm">
+<div class="form-group">
+<label for="username">Username:</label>
+<input type="text" id="username" name="username">
+<div id="usernameError" class="error"></div>
+</div>
+<div class="form-group">
+<label for="password">Password:</label>
+<input type="password" id="password" name="password">
+<div id="passwordError" class="error"></div>
+</div>
+<div class="form-group">
+<label for="confirmPassword">Confirm Password:</label>
+<input type="password" id="confirmPassword" name="confirmPassword">
+<div id="confirmPasswordError" class="error"></div>
+</div>
+<div class="form-group">
+<label for="email">Email:</label>
+<input type="email" id="email" name="email">
+<div id="emailError" class="error"></div>
+</div>
+<button type="submit">Register</button>
+</form>
+<script>
+// Modular validation function
+function validateRegistration(userData) {
+const errors = {};
+// Username validation
+if (!userData.username.trim()) {
+errors.username = "Username is required";
+}
+// Password validation
+if (userData.password.length < 6) {
+errors.password = "Password must be at least 6 characters";
+}
+// Confirm Password validation
+if (userData.password !== userData.confirmPassword) {
+errors.confirmPassword = "Passwords do not match";
+}
+// Email validation
+if (!userData.email.includes('@') || !userData.email.includes('.')) {
+errors.email = "Please enter a valid email address";
+}
+return {
+isValid: Object.keys(errors).length === 0,
+errors
+};
+}
+// Form submission handler
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+e.preventDefault();
+// Clear previous errors
+document.querySelectorAll('.error').forEach(el => {
+el.textContent = '';
+});
+// Get form data
+const formData = {
+username: document.getElementById('username').value,
+password: document.getElementById('password').value,
+confirmPassword: document.getElementById('confirmPassword').value,
+email: document.getElementById('email').value
+};
+// Validate
+const validationResult = validateRegistration(formData);
+if (validationResult.isValid) {
+alert('Registration successful!');
+// Here you would typically submit the form to a server
+} else {
+// Display errors
+for (const [field, message] of Object.entries(validationResult.errors)) {
+document.getElementById(`${field}Error`).textContent = message;
+}
+}
+});
+</script>
+</body>
+</html>

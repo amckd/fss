@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Table</title>
+<style>
+table {
+border-collapse: collapse;
+width: 50%;
+margin: 20px 0;
+}
+th, td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: center;
+cursor: pointer;
+}
+th {
+background-color: #f2f2f2;
+}
+#display {
+margin-top: 20px;
+padding: 10px;
+border: 1px solid #ccc;
+min-height: 20px;
+width: 50%;
+}
+</style>
+</head>
+<body>
+<table id="table1">
+<tr>
+<th>Column 1</th>
+<th>Column 2</th>
+</tr>
+</table>
+<button id="btn1">Add Row</button>
+<div id="display"></div>
+<script>
+document.getElementById('btn1').addEventListener('click', function() {
+const table = document.getElementById('table1');
+const newRow = table.insertRow();
+// Create two cells with random numbers
+for (let i = 0; i < 2; i++) {
+const cell = newRow.insertCell();
+const randomNum = Math.floor(Math.random() * 200) + 1;
+cell.textContent = randomNum;
+// Add mouseover event for color change
+cell.addEventListener('mouseover', function() {
+if (randomNum % 2 === 0) {
+this.style.backgroundColor = 'lightgreen';
+} else {
+this.style.backgroundColor = 'lightcoral';
+}
+});
+// Add mouseout event to clear color
+cell.addEventListener('mouseout', function() {
+this.style.backgroundColor = '';
+});
+// Add click event to display content
+cell.addEventListener('click', function() {
+document.getElementById('display').textContent = this.textContent;
+});
+}
+});
+</script>
+</body>
+</html>

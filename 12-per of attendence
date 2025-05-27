@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Tracker</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+}
+table {
+width: 80%;
+border-collapse: collapse;
+margin: 20px auto;
+}
+th, td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: center;
+}
+th {
+background-color: #f2f2f2;
+}
+.low-attendance {
+background-color: #ffcccc; /* Red for <75% */
+}
+.medium-attendance {
+background-color: #cce5ff; /* Blue for 75-85% */
+}
+.high-attendance {
+background-color: #ccffcc; /* Green for >85% */
+}
+h1 {
+text-align: center;
+color: #333;
+}
+</style>
+</head>
+<body>
+<h1>Attendance Report</h1>
+<table id="attendanceTable">
+<thead>
+<tr>
+<th>Name</th>
+<th>Classes Attended</th>
+<th>Attendance %</th>
+</tr>
+</thead>
+<tbody>
+<!-- Data will be inserted by JavaScript -->
+</tbody>
+</table>
+<script>
+// Sample data - can be replaced with actual data
+const students = [
+{ name: "John Doe", attended: 25 },
+{ name: "Jane Smith", attended: 32 },
+{ name: "Mike Johnson", attended: 30 },
+{ name: "Sarah Williams", attended: 28 },
+{ name: "David Brown", attended: 35 }
+];
+const totalClasses = 40;
+const tableBody = document.querySelector('#attendanceTable tbody');
+students.forEach(student => {
+// Calculate attendance percentage
+const percentage = (student.attended / totalClasses) * 100;
+const roundedPercentage = Math.round(percentage * 10) / 10; // Round to 1 decimal
+place
+// Create new row
+const row = document.createElement('tr');
+// Determine row class based on attendance percentage
+if (percentage < 75) {
+row.classList.add('low-attendance');
+} else if (percentage >= 75 && percentage <= 85) {
+row.classList.add('medium-attendance');
+} else {
+row.classList.add('high-attendance');
+}
+// Add cells to the row
+row.innerHTML = `
+<td>${student.name}</td>
+<td>${student.attended}</td>
+<td>${roundedPercentage}%</td>
+`;
+// Add row to table
+tableBody.appendChild(row);
+});
+</script>
+</body>
+</html>

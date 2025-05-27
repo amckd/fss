@@ -1,0 +1,45 @@
+import React, { useState } from 'react';
+function WelcomeMessage() {
+const [message, setMessage] = useState("Welcome to Dayananda Sagar");
+const handleClick = () => {
+setMessage("The best place to enjoy without time");
+};
+return (
+<div style={{ textAlign: 'center', marginTop: '50px' }}>
+<h1>{message}</h1>
+<button
+onClick={handleClick}
+style={{
+padding: '10px 20px',
+fontSize: '16px',
+backgroundColor: '#4CAF50',
+color: 'white',
+border: 'none',
+borderRadius: '5px',
+cursor: 'pointer'
+}}
+>
+Change Message
+</button>
+</div>
+);
+}
+export default WelcomeMessage;
+. Express.js Server (Mount Event Function)
+const express = require('express');
+const app = express();
+// Mount event middleware
+app.use((req, res, next) => {
+console.log("Teacher taught --- First Message");
+next();
+console.log("Student did not listen --- Second Message");
+});
+// Basic route
+app.get('/', (req, res) => {
+res.send('Server is running');
+});
+// Start server
+const PORT = 3000;
+app.listen(PORT, () => {
+console.log(`Server listening on PORT ${PORT}`);
+});

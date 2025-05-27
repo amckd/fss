@@ -1,0 +1,6 @@
+function isPalindrome(input) {
+// Convert input to string to handle both numbers and strings
+const str = String(input).toLowerCase().replace(/[^a-z0-9]/g, '');
+// Compare the string with its reverse
+return str === str.split('').reverse().join('');
+}

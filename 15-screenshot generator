@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poems by Sir Walter Scott</title>
+<style>
+body {
+font-family: 'Georgia', serif;
+max-width: 800px;
+margin: 0 auto;
+padding: 20px;
+line-height: 1.8;
+background-color: #f9f9f9;
+}
+h1 {
+text-align: center;
+color: #333;
+margin-bottom: 30px;
+text-decoration: underline;
+}
+h2 {
+color: #444;
+text-align: center;
+text-decoration: underline;
+margin-bottom: 10px;
+}
+hr {
+width: 200px;
+margin: 0 auto 20px;
+border: 0;
+height: 1px;
+background: linear-gradient(to right, transparent, #333, transparent);
+}
+p {
+font-size: 1.1em;
+text-align: center;
+margin: 20px 0;
+}
+.poet {
+font-style: italic;
+text-align: right;
+margin-top: 40px;
+text-decoration: underline;
+}
+.screenshot-btn {
+display: block;
+width: 200px;
+margin: 30px auto;
+padding: 10px;
+background-color: #4a6fa5;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+}
+</style>
+</head>
+<body>
+<h1><u>Poems by Sir Walter Scott</u></h1>
+<div id="poem-content">
+<h2><u>My Native Land</u></h2>
+<hr>
+<p>
+<u>Breathes</u> there the man, with soul so dead,<br>
+Who never to himself hath said,<br>
+This is my own, my native land!
+</p>
+<div class="poet"><u>- Sir Walter Scott</u></div>
+</div>
+<button class="screenshot-btn" id="capture-btn">Generate Screenshot</button>
+<script>
+document.getElementById('capture-btn').addEventListener('click', async () => {
+try {
+const response = await fetch('https://api.screenshotapi.io/capture', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'Authorization': 'Bearer YOUR_API_KEY' // Replace with actual API key
+},
+body: JSON.stringify({
+url: window.location.href,
+viewport: {
+width: 800,
+height: 600
+},
+full_page: true
+})
+});
+const data = await response.json();
+if (data.screenshot_url) {
+window.open(data.screenshot_url, '_blank');
+} else {
+alert('Screenshot generation failed. Please try again.');
+}
+} catch (error) {
+console.error('Error:', error);
+alert('Failed to generate screenshot. Check console for details.');
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+import React from 'react';
+import './App.css';
+function IssueTracker() {
+// Static issue data
+const issues = [
+{
+id: 1,
+title: 'Error in Login screen',
+description: 'On entry of correct password it displays incorrect password unable to login',
+status: 'Closed'
+},
+{
+id: 2,
+title: 'Server Message 200 On Error',
+description: 'Instead of 204 No content error message Message 200 Success is
+displayed',
+status: 'Open'
+},
+{
+id: 3,
+title: 'Mobile Responsiveness Issue',
+description: 'Layout breaks on mobile devices below 400px width',
+status: 'Open'
+}
+];
+return (
+<div className="issue-tracker">
+<h1>Issue Tracker</h1>
+<div className="issues-container">
+{issues.map(issue => (
+<div key={issue.id} className={`issue-card ${issue.status.toLowerCase()}`}>
+<h3>{issue.title}</h3>
+<p className="description">{issue.description}</p>
+<div className="status">
+Status: <span className={`status-badge
+${issue.status.toLowerCase()}`}>{issue.status}</span>
+</div>
+</div>
+))}
+</div>
+</div>
+);
+}
+export default IssueTracker;

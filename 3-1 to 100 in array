@@ -1,0 +1,52 @@
+function bizzFizz() {
+const result = [];
+for (let i = 1; i <= 100; i++) {
+if (i % 3 === 0 && i % 5 === 0) {
+result.push("BizzFizz");
+} else if (i % 3 === 0) {
+result.push("Bizz");
+} else if (i % 5 === 0) {
+result.push("Fizz");
+} else {
+result.push(i);
+}
+}
+return result;
+}
+// Usage:
+const bizzFizzArray = bizzFizz();
+console.log(bizzFizzArray);
+2nd part
+const students = [
+{ usnno: 'IBS23023', name: 'swachha', grade: 45 },
+{ usnno: 'IBS23028', name: 'garathi', grade: 36 },
+{ usnno: 'IBS23024', name: 'racket', grade: 42 },
+{ usnno: 'IBS23025', name: 'poccha', grade: 35 },
+{ usnno: 'IBS23026', name: 'pacchi', grade: 25 },
+{ usnno: 'IBS23029', name: 'gathi', grade: 22 },
+{ usnno: 'IBS23030', name: 'vidhi', grade: 20 }
+];
+function rangeOfStudents(studentArray) {
+const count = {
+'0-20': 0,
+'21-30': 0,
+'31-40': 0,
+'41-50': 0
+};
+studentArray.forEach(student => {
+const grade = student.grade;
+if (grade >= 0 && grade <= 20) {
+count['0-20']++;
+} else if (grade >= 21 && grade <= 30) {
+count['21-30']++;
+} else if (grade >= 31 && grade <= 40) {
+count['31-40']++;
+} else if (grade >= 41 && grade <= 50) {
+count['41-50']++;
+}
+});
+return count;
+}
+// Usage:
+const gradeRanges = rangeOfStudents(students);
+console.log(gradeRanges);
